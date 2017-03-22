@@ -4,6 +4,7 @@
 #include <conio.h>
 #include "MyList.h"
 #include "MyArray.h"
+#include "MyHeap.h"
 
 
 int main()

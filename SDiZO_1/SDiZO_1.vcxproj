@@ -139,12 +139,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyArray.h" />
+    <ClInclude Include="MyHeap.h" />
     <ClInclude Include="MyList.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyArray.cpp" />
+    <ClCompile Include="MyHeap.cpp" />
     <ClCompile Include="MyList.cpp" />
     <ClCompile Include="SDiZO_1.cpp" />
     <ClCompile Include="stdafx.cpp">
