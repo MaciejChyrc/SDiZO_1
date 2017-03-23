@@ -5,8 +5,8 @@ class MyHeap : MyArray
 private:
 	
 public:
-	MyHeap();
-	MyHeap(unsigned int size);
+	MyHeap() : MyArray(){}
+	MyHeap(unsigned int size) : MyArray(size){}
 	~MyHeap();
 	void deleteRoot();
 	int leftSon (unsigned int index);

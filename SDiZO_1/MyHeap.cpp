@@ -2,15 +2,15 @@
 #include "MyHeap.h"
 
 
-MyHeap::MyHeap()
+/*MyHeap::MyHeap() : MyArray()
 {
 	
 }
 
-MyHeap::MyHeap(unsigned int size)
+MyHeap::MyHeap(unsigned int size) : MyArray(size)
 {
-
-}
+	
+}*/
 
 MyHeap::~MyHeap()
 {

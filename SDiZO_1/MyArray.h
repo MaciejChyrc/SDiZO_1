@@ -7,7 +7,7 @@ protected:
 public:
 	MyArray();
 	MyArray(unsigned int size);
-	~MyArray();
+	virtual ~MyArray();
 	int at(unsigned int index);
 	void pushBack(int val);
 	void pushFront(int val);
