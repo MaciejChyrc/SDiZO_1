@@ -148,7 +148,7 @@ void MyArray::swap(unsigned int element1, unsigned int element2)
 	arrayptr[element2] = temp;
 }
 //wypisanie zawartosci calej tablicy na ekran
-void MyArray::print()
+void MyArray::printArray()
 {
 	for (int i = 0; i < arraySize; i++)
 	{

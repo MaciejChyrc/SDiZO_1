@@ -18,7 +18,7 @@ public:
 	void pop(unsigned int index);
 	void resize(unsigned int newSize);
 	void swap(unsigned int element1, unsigned int element2);
-	void print();
+	void printArray();
 	int& operator[] (size_t index);
 	const int& operator[] (size_t index) const;
 };

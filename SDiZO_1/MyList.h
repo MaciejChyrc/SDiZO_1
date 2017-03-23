@@ -26,5 +26,5 @@ public:
 	void popBack ();
 	void pop (unsigned int position);
 	Element* findPosition (unsigned int position);
-	void print();
+	void printList();
 };

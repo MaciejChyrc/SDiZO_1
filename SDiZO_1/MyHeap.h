@@ -1,14 +1,21 @@
 #pragma once
-#include "MyArray.h"
-class MyHeap : MyArray
+class MyHeap
 {
 private:
-	
+	unsigned int arraySize;
+	int* arrayptr;
 public:
-	MyHeap() : MyArray(){}
-	MyHeap(unsigned int size) : MyArray(size){}
+	MyHeap();
+	MyHeap(unsigned int size);
 	~MyHeap();
+	int at(unsigned int index);
+	void pushBack(int val);
+	void resize(unsigned int newSize);
+	void swap(unsigned int element1, unsigned int element2);
 	void deleteRoot();
-	int leftSon (unsigned int index);
-	int rightSon (unsigned int index);
+	void addToTail(int val);
+	int leftSon(unsigned int index);
+	int rightSon(unsigned int index);
+	int parent(unsigned int index);
+	void printHeap(unsigned int index);
 };

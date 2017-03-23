@@ -197,7 +197,7 @@ void MyList::pop(unsigned int position)
 	}
 }
 //wypisanie zawartosci calej listy na ekran
-void MyList::print()
+void MyList::printList()
 {
 	Element *element = front;
 	for (int i = 0; i < listSize; i++, element = element->next)

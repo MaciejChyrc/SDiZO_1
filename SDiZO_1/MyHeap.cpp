@@ -1,28 +1,86 @@
 #include "stdafx.h"
 #include "MyHeap.h"
+#include <iostream>
 
 
-/*MyHeap::MyHeap() : MyArray()
+MyHeap::MyHeap()
 {
-	
+	arraySize = 0;
+	arrayptr = nullptr;
 }
 
-MyHeap::MyHeap(unsigned int size) : MyArray(size)
+MyHeap::MyHeap(unsigned int size)
 {
-	
-}*/
+	try
+	{
+		arraySize = size;
+		arrayptr = new int[arraySize];
+	}
+	catch (std::bad_alloc)
+	{
+		std::cerr << "Nie udalo sie poprawnie zaalokowac tablicy.\n";
+	}
+}
 
 MyHeap::~MyHeap()
 {
 
 }
-//powinno byc ok
+int MyHeap::at(unsigned int index)
+{
+	return arrayptr[index];
+}
+
+void MyHeap::pushBack(int val)
+{
+	resize(arraySize + 1);
+	arrayptr[arraySize - 1] = val;
+}
+
+void MyHeap::resize(unsigned int newSize)
+{
+	try
+	{
+		int *temp = new int[newSize];
+		//przepisanie calej tablicy i zostawienie pol dodanych niezainicjalizowanych (moga tam byc smieci)
+		if (newSize > arraySize)
+		{
+			for (int i = 0; i < arraySize; i++)
+			{
+				temp[i] = arrayptr[i];
+			}
+		}
+		//przepisanie tablicy az do osiagniecia nowego rozmiaru (ostatnie elementy tracimy)
+		else if (newSize < arraySize)
+		{
+			for (int i = 0; i < newSize; i++)
+			{
+				temp[i] = arrayptr[i];
+			}
+		}
+		delete[] arrayptr;
+		arrayptr = temp;
+		arraySize = newSize;
+	}
+	catch (std::bad_alloc)
+	{
+		std::cerr << "Nie udalo sie poprawnie zaalokowac kopca.\n";
+	}
+}
+void MyHeap::swap(unsigned int element1, unsigned int element2)
+{
+	int temp = arrayptr[element1];
+	arrayptr[element1] = arrayptr[element2];
+	arrayptr[element2] = temp;
+}
+//do poprawy indeksy
 void MyHeap::deleteRoot()
 {
+	if (arraySize == 0) return;
 	arrayptr[0] = arrayptr[arraySize - 1];
 	resize(arraySize - 1);
-	int i = 0;
-	while ((i * 2 + 1) < arraySize)
+	int i = 1;
+	while (leftSon(i) < arraySize)
 	{
 		if (arrayptr[i] < leftSon(i) || arrayptr[i] < rightSon(i))
 		{
@@ -40,6 +98,25 @@ void MyHeap::deleteRoot()
 		else break;
 	}
 }
+//podejrzewam tu blad bo smieci sie dostaja do kopca
+void MyHeap::addToTail(int val)
+{
+	if (arraySize == 0)
+	{
+		resize(1);
+		arrayptr[0] = val;
+	}
+	else
+	{
+		pushBack(val);
+		int i = arraySize - 1;
+		while (i > 0 && parent(i) < val)
+		{
+			swap(arrayptr[i], parent(i));
+			i = (i - 1) / 2;
+		}
+	}
+}
 
 int MyHeap::leftSon(unsigned int index)
 {
@@ -49,4 +126,23 @@ int MyHeap::leftSon(unsigned int index)
 int MyHeap::rightSon(unsigned int index)
 {
 	return arrayptr[index * 2 + 2];
+}
+
+int MyHeap::parent(unsigned int index)
+{
+	return arrayptr[(index - 1) / 2];
+}
+
+void MyHeap::printHeap(unsigned int index)
+{
+	if (index < arraySize)
+	{
+		std::cout << "Poziom " << index << ": ";
+		for (int i = index; i < index * 2; i++)
+		{
+			std::cout << arrayptr[i] << " ";
+		}
+		std::cout << "\n";
+		if (index * 2 < arraySize) printHeap(index * 2);
+	}
 }
