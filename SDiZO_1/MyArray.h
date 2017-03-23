@@ -1,7 +1,7 @@
 #pragma once
 class MyArray
 {
-private:
+protected:
 	unsigned int arraySize;
 	int* arrayptr;
 public:
