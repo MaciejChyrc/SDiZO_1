@@ -27,6 +27,11 @@ MyArray::~MyArray()
 
 }
 
+unsigned int MyArray::getSize()
+{
+	return arraySize;
+}
+
 int MyArray::at(unsigned int index)
 {
 	return arrayptr[index];

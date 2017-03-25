@@ -14,11 +14,12 @@ private:
 		}
 	};
 
-	int listSize;
+	unsigned int listSize;
 public:
 	MyList();
 	~MyList();
 	Element *front, *back;
+	unsigned int getSize();
 	void pushFront (int val);
 	void pushBack (int val);
 	void push (int val, unsigned int position);

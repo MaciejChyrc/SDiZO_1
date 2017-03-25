@@ -8,6 +8,7 @@ public:
 	MyArray();
 	MyArray(unsigned int size);
 	virtual ~MyArray();
+	unsigned int getSize();
 	int at(unsigned int index);
 	void pushBack(int val);
 	void pushFront(int val);

@@ -19,6 +19,7 @@ using std::string;
 void readTextFile (string filepath, MyArray *array);
 long long int read_QPC();
 void writeRandomToArray (MyArray *array, int arraySize);
+void rewriteArrayInList (MyArray *array, MyList *list);
 
 int main()
 {
@@ -297,7 +298,11 @@ int main()
 				cout << "Podaj zadany rozmiar tablicy: \n";
 				cin >> cinValue;
 				writeRandomToArray(arrayOfInts, cinValue);
+				rewriteArrayInList(arrayOfInts, listOfInts);
+				cout << "Zawartosc tablicy: \n";
 				arrayOfInts->printArray();
+				cout << "Zawartosc listy: \n";
+				listOfInts->printList();
 			}
 			break;
 		default:
@@ -358,5 +363,13 @@ void writeRandomToArray (MyArray *array, int arraySize)
 	{
 		value = distribution(eng);
 		array->insert(value, i);
+	}
+}
+
+void rewriteArrayInList (MyArray *array, MyList *list)
+{
+	for (int i = 0; i < array->getSize(); i++)
+	{
+		list->pushBack(array->at(i));
 	}
 }

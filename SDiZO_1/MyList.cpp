@@ -36,6 +36,11 @@ MyList::Element* MyList::findPosition(unsigned int position)
 	}
 }
 
+unsigned int MyList::getSize()
+{
+	return listSize;
+}
+
 void MyList::pushFront(int val)
 {
 	if (!listSize)

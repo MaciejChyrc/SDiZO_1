@@ -26,6 +26,12 @@ MyHeap::~MyHeap()
 {
 
 }
+
+unsigned int MyHeap::getSize()
+{
+	return arraySize;
+}
+
 int MyHeap::at(unsigned int index)
 {
 	return arrayptr[index];

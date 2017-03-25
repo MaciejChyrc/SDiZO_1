@@ -8,6 +8,7 @@ public:
 	MyHeap();
 	MyHeap(unsigned int size);
 	~MyHeap();
+	unsigned int getSize();
 	int at(unsigned int index);
 	void pushBack(int val);
 	void resize(unsigned int newSize);
