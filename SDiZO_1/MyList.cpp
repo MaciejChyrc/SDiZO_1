@@ -202,6 +202,6 @@ void MyList::printList()
 	Element *element = front;
 	for (int i = 0; i < listSize; i++, element = element->next)
 	{
-		std::cout << element->value << "\n";
+		std::cout << element->value << "\t";
 	}
 }

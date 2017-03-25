@@ -22,7 +22,7 @@ void writeRandomToArray (MyArray *array, int arraySize);
 
 int main()
 {
-	MyList lista;
+	/*MyList lista;
 	lista.pushFront(1);
 	lista.pushFront(2);
 	lista.pushFront(3);
@@ -50,7 +50,7 @@ int main()
 	kopiec.addToTail(3);
 	//kopiec.printHeap(1);
 	cout << kopiec.at(0) << " " << kopiec.at(1) << " " << kopiec.at(2);
-	_getch();
+	_getch();*/
 	//-----Czesc wlasciwa programu-------------------------------------
 
 	long long int frequency, start, elapsed;
@@ -64,7 +64,7 @@ int main()
 
 	do
 	{
-		cout << "1. Wczytaj dane z pliku.\n"
+		cout << "\n1. Wczytaj dane z pliku.\n"
 			<< "2. Wykonaj operacje na tablicy.\n"
 			<< "3. Wykonaj operacje na liscie.\n"
 			<< "4. Wykonaj operacje na kopcu.\n"
@@ -84,14 +84,14 @@ int main()
 			{
 				do
 				{
-					cout << "1. Dodaj element z przodu.\n"
+					cout << "\n1. Dodaj element z przodu.\n"
 						<< "2. Dodaj element z tylu.\n"
 						<< "3. Dodaj na wybranej pozycji.\n"
 						<< "4. Usun z przodu.\n"
 						<< "5. Usun z tylu.\n"
 						<< "6. Usun z wybranej pozycji.\n"
 						<< "7. Wyswietl zawartosc tablicy.\n"
-						<< "0. Przejdz do glownego menu.\n";
+						<< "9. Przejdz do glownego menu.\n";
 					menuKey = _getch();
 					switch (menuKey)
 					{
@@ -101,8 +101,10 @@ int main()
 						start = read_QPC();
 						arrayOfInts->pushFront(cinValue);
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '2':
 						cout << "Wpisz liczbe: \n";
@@ -110,8 +112,10 @@ int main()
 						start = read_QPC();
 						arrayOfInts->pushBack(cinValue);
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '3':
 						cout << "Wpisz liczbe: \n";
@@ -121,22 +125,28 @@ int main()
 						start = read_QPC();
 						arrayOfInts->push(cinValue, cinIndex);
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '4':
 						start = read_QPC();
 						arrayOfInts->popFront();
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '5':
 						start = read_QPC();
 						arrayOfInts->popBack();
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '6':
 						cout << "Wpisz indeks: \n";
@@ -144,31 +154,36 @@ int main()
 						start = read_QPC();
 						arrayOfInts->pop(cinIndex);
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '7':
 						cout << "Zawartosc tablicy: \n";
 						arrayOfInts->printArray();
 						break;
+					case '0':
+						menuKey = '9';
+						break;
 					default:
 						break;
 					}
-				} while (menuKey != '0');
+				} while (menuKey != '9');
 			}
 			break;
 		case '3':
 			{
 				do
 				{
-					cout << "1. Dodaj element z przodu.\n"
+					cout << "\n1. Dodaj element z przodu.\n"
 						<< "2. Dodaj element z tylu.\n"
 						<< "3. Dodaj na wybranej pozycji.\n"
 						<< "4. Usun z przodu.\n"
 						<< "5. Usun z tylu.\n"
 						<< "6. Usun z wybranej pozycji.\n"
 						<< "7. Wyswietl zawartosc listy.\n"
-						<< "0. Przejdz do glownego menu.\n";
+						<< "9. Przejdz do glownego menu.\n";
 					menuKey = _getch();
 					switch (menuKey)
 					{
@@ -178,8 +193,10 @@ int main()
 						start = read_QPC();
 						listOfInts->pushFront(cinValue);
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '2':
 						cout << "Wpisz liczbe: \n";
@@ -187,8 +204,10 @@ int main()
 						start = read_QPC();
 						listOfInts->pushBack(cinValue);
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '3':
 						cout << "Wpisz liczbe: \n";
@@ -198,22 +217,28 @@ int main()
 						start = read_QPC();
 						listOfInts->push(cinValue, cinIndex);
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '4':
 						start = read_QPC();
 						listOfInts->popFront();
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '5':
 						start = read_QPC();
 						listOfInts->popBack();
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '6':
 						cout << "Wpisz pozycje: \n";
@@ -221,28 +246,33 @@ int main()
 						start = read_QPC();
 						listOfInts->pop(cinIndex);
 						elapsed = read_QPC() - start;
-						cout << "Czas [ms] = " << std::setprecision(0)
+						cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
 						break;
 					case '7':
 						cout << "Zawartosc listy: \n";
 						listOfInts->printList();
 						break;
+					case '0':
+						menuKey = '9';
+						break;
 					default:
 						break;
 					}
 				}
-				while (menuKey != '0');
+				while (menuKey != '9');
 			}
 			break;
 		case '4':
 			{
 				do
 				{
-					cout << "1. Dodaj element do kopca.\n"
+					cout << "\n1. Dodaj element do kopca.\n"
 						<< "2. Usun korzen.\n"
 						<< "3. Wyswietl zawartosc kopca.\n"
-						<< "0. Przejdz do glownego menu.\n";
+						<< "9. Przejdz do glownego menu.\n";
 					menuKey = _getch();
 					switch (menuKey)
 					{
@@ -252,11 +282,14 @@ int main()
 
 					case '3':
 
+					case '0':
+						menuKey = '9';
+						break;
 					default:
 						break;
 					}
 				}
-				while (menuKey != '0');
+				while (menuKey != '9');
 			}
 			break;
 		case '5':

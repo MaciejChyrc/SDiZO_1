@@ -152,7 +152,7 @@ void MyArray::printArray()
 {
 	for (int i = 0; i < arraySize; i++)
 	{
-		std::cout << arrayptr[i] << "\n";
+		std::cout << arrayptr[i] << "\t";
 	}
 }
 
