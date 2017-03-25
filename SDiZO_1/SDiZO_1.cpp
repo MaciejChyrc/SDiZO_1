@@ -7,6 +7,7 @@
 #include <Windows.h>
 #include <ctime>
 #include <iomanip>
+#include <random>
 #include "MyList.h"
 #include "MyArray.h"
 #include "MyHeap.h"
@@ -17,6 +18,7 @@ using std::string;
 
 void readTextFile (string filepath, MyArray *array);
 long long int read_QPC();
+void writeRandomToArray (MyArray *array, int arraySize);
 
 int main()
 {
@@ -52,7 +54,7 @@ int main()
 	//-----Czesc wlasciwa programu-------------------------------------
 
 	long long int frequency, start, elapsed;
-	QueryPerformanceFrequency((LARGE_INTEGER*)&frequency);
+	QueryPerformanceFrequency(reinterpret_cast<LARGE_INTEGER*>(&frequency));
 	string filepath = "";
 	MyArray *arrayOfInts = new MyArray();
 	MyList *listOfInts = new MyList();
@@ -66,6 +68,7 @@ int main()
 			<< "2. Wykonaj operacje na tablicy.\n"
 			<< "3. Wykonaj operacje na liscie.\n"
 			<< "4. Wykonaj operacje na kopcu.\n"
+			<< "5. Wypelnij tablice losowymi liczbami.\n"
 			<< "0. Wyjdz z programu.\n"
 			<< "Wcisnij przycisk...\n";
 		menuKey = _getch();
@@ -152,108 +155,118 @@ int main()
 						break;
 					}
 				} while (menuKey != '0');
-			break;
 			}
+			break;
 		case '3':
-		{
-			do
 			{
-				cout << "1. Dodaj element z przodu.\n"
-					<< "2. Dodaj element z tylu.\n"
-					<< "3. Dodaj na wybranej pozycji.\n"
-					<< "4. Usun z przodu.\n"
-					<< "5. Usun z tylu.\n"
-					<< "6. Usun z wybranej pozycji.\n"
-					<< "7. Wyswietl zawartosc listy.\n"
-					<< "0. Przejdz do glownego menu.\n";
-				menuKey = _getch();
-				switch (menuKey)
+				do
 				{
-				case '1':
-					cout << "Wpisz liczbe: \n";
-					cin >> cinValue;
-					start = read_QPC();
-					listOfInts->pushFront(cinValue);
-					elapsed = read_QPC() - start;
-					cout << "Czas [ms] = " << std::setprecision(0)
-						<< (1000.0 * elapsed) / frequency << "\n";
-					break;
-				case '2':
-					cout << "Wpisz liczbe: \n";
-					cin >> cinValue;
-					start = read_QPC();
-					listOfInts->pushBack(cinValue);
-					elapsed = read_QPC() - start;
-					cout << "Czas [ms] = " << std::setprecision(0)
-						<< (1000.0 * elapsed) / frequency << "\n";
-					break;
-				case '3':
-					cout << "Wpisz liczbe: \n";
-					cin >> cinValue;
-					cout << "Wpisz pozycje: \n";
-					cin >> cinIndex;
-					start = read_QPC();
-					listOfInts->push(cinValue, cinIndex);
-					elapsed = read_QPC() - start;
-					cout << "Czas [ms] = " << std::setprecision(0)
-						<< (1000.0 * elapsed) / frequency << "\n";
-					break;
-				case '4':
-					start = read_QPC();
-					listOfInts->popFront();
-					elapsed = read_QPC() - start;
-					cout << "Czas [ms] = " << std::setprecision(0)
-						<< (1000.0 * elapsed) / frequency << "\n";
-					break;
-				case '5':
-					start = read_QPC();
-					listOfInts->popBack();
-					elapsed = read_QPC() - start;
-					cout << "Czas [ms] = " << std::setprecision(0)
-						<< (1000.0 * elapsed) / frequency << "\n";
-					break;
-				case '6':
-					cout << "Wpisz pozycje: \n";
-					cin >> cinIndex;
-					start = read_QPC();
-					listOfInts->pop(cinIndex);
-					elapsed = read_QPC() - start;
-					cout << "Czas [ms] = " << std::setprecision(0)
-						<< (1000.0 * elapsed) / frequency << "\n";
-					break;
-				case '7':
-					cout << "Zawartosc listy: \n";
-					listOfInts->printList();
-					break;
-				default:
-					break;
+					cout << "1. Dodaj element z przodu.\n"
+						<< "2. Dodaj element z tylu.\n"
+						<< "3. Dodaj na wybranej pozycji.\n"
+						<< "4. Usun z przodu.\n"
+						<< "5. Usun z tylu.\n"
+						<< "6. Usun z wybranej pozycji.\n"
+						<< "7. Wyswietl zawartosc listy.\n"
+						<< "0. Przejdz do glownego menu.\n";
+					menuKey = _getch();
+					switch (menuKey)
+					{
+					case '1':
+						cout << "Wpisz liczbe: \n";
+						cin >> cinValue;
+						start = read_QPC();
+						listOfInts->pushFront(cinValue);
+						elapsed = read_QPC() - start;
+						cout << "Czas [ms] = " << std::setprecision(0)
+							<< (1000.0 * elapsed) / frequency << "\n";
+						break;
+					case '2':
+						cout << "Wpisz liczbe: \n";
+						cin >> cinValue;
+						start = read_QPC();
+						listOfInts->pushBack(cinValue);
+						elapsed = read_QPC() - start;
+						cout << "Czas [ms] = " << std::setprecision(0)
+							<< (1000.0 * elapsed) / frequency << "\n";
+						break;
+					case '3':
+						cout << "Wpisz liczbe: \n";
+						cin >> cinValue;
+						cout << "Wpisz pozycje: \n";
+						cin >> cinIndex;
+						start = read_QPC();
+						listOfInts->push(cinValue, cinIndex);
+						elapsed = read_QPC() - start;
+						cout << "Czas [ms] = " << std::setprecision(0)
+							<< (1000.0 * elapsed) / frequency << "\n";
+						break;
+					case '4':
+						start = read_QPC();
+						listOfInts->popFront();
+						elapsed = read_QPC() - start;
+						cout << "Czas [ms] = " << std::setprecision(0)
+							<< (1000.0 * elapsed) / frequency << "\n";
+						break;
+					case '5':
+						start = read_QPC();
+						listOfInts->popBack();
+						elapsed = read_QPC() - start;
+						cout << "Czas [ms] = " << std::setprecision(0)
+							<< (1000.0 * elapsed) / frequency << "\n";
+						break;
+					case '6':
+						cout << "Wpisz pozycje: \n";
+						cin >> cinIndex;
+						start = read_QPC();
+						listOfInts->pop(cinIndex);
+						elapsed = read_QPC() - start;
+						cout << "Czas [ms] = " << std::setprecision(0)
+							<< (1000.0 * elapsed) / frequency << "\n";
+						break;
+					case '7':
+						cout << "Zawartosc listy: \n";
+						listOfInts->printList();
+						break;
+					default:
+						break;
+					}
 				}
-			} while (menuKey != '0');
+				while (menuKey != '0');
+			}
 			break;
-		}
 		case '4':
-		{
-			do
 			{
-				cout << "1. Dodaj element do kopca.\n"
-					<< "2. Usun korzen.\n"
-					<< "3. Wyswietl zawartosc kopca.\n"
-					<< "0. Przejdz do glownego menu.\n";
-				menuKey = _getch();
-				switch (menuKey)
+				do
 				{
-				case '1':
+					cout << "1. Dodaj element do kopca.\n"
+						<< "2. Usun korzen.\n"
+						<< "3. Wyswietl zawartosc kopca.\n"
+						<< "0. Przejdz do glownego menu.\n";
+					menuKey = _getch();
+					switch (menuKey)
+					{
+					case '1':
 
-				case '2':
+					case '2':
 
-				case '3':
+					case '3':
 
-				default:
-					break;
+					default:
+						break;
+					}
 				}
-			} while (menuKey != '0');
+				while (menuKey != '0');
+			}
 			break;
-		}
+		case '5':
+			{
+				cout << "Podaj zadany rozmiar tablicy: \n";
+				cin >> cinValue;
+				writeRandomToArray(arrayOfInts, cinValue);
+				arrayOfInts->printArray();
+			}
+			break;
 		default:
 			break;
 		}
@@ -297,5 +310,20 @@ long long int read_QPC()
 	DWORD_PTR oldmask = SetThreadAffinityMask(GetCurrentThread(), 0);
 	QueryPerformanceCounter(&count);
 	SetThreadAffinityMask(GetCurrentThread(), oldmask);
-	return ((long long int)count.QuadPart);
+	return static_cast<long long int>(count.QuadPart);
+}
+
+void writeRandomToArray (MyArray *array, int arraySize)
+{
+	int value;
+	std::random_device rng;
+	std::mt19937 eng(rng());
+	std::uniform_int_distribution<> distribution(1, 1000000);
+	array->resize(arraySize);
+
+	for (int i = 0; i < arraySize; i++)
+	{
+		value = distribution(eng);
+		array->insert(value, i);
+	}
 }
