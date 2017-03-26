@@ -48,14 +48,19 @@ int main()
 	tablica2.printArray();
 
 	MyHeap kopiec;
-	kopiec.addToTail(1);
-	kopiec.addToTail(4);
-	kopiec.addToTail(3);
-	kopiec.addToTail(15);
-	//kopiec.printHeap(1);
-	cout << kopiec.at(0) << " " << kopiec.at(1) << " " << kopiec.at(2) << kopiec.at(3);
+	kopiec.heapPush(1);
+	kopiec.heapPush(4);
+	kopiec.heapPush(3);
+	kopiec.heapPush(15);
+	kopiec.heapPush(14);
+	kopiec.heapPush(15);
+	kopiec.heapPush(42);
+	kopiec.printHeap(1, 1);
+	cout << kopiec.at(0) << " " << kopiec.at(1) << " " << kopiec.at(2) << " " << kopiec.at(3);
+	kopiec.heapPop();
+	cout << kopiec.at(0) << " " << kopiec.at(1) << " " << kopiec.at(2);
 	_getch();
-	return 0;*/
+	return 0;}*/
 
 	//-----Czesc wlasciwa programu-------------------------------------
 
@@ -69,7 +74,7 @@ int main()
 		arrayPopFrontTimes, arrayPopBackTimes, arrayPopTimes;
 	std::vector<double> listPushFrontTimes, listPushBackTimes, listPushTimes,
 		listPopFrontTimes, listPopBackTimes, listPopTimes;
-	//std::vector<double> heapAddToTailTimes, heapRemoveRootTimes;
+	std::vector<double> heapPushTimes, heapPopTimes;
 	char menuKey = 0;
 	int cinValue = 0, cinIndex = 0;
 

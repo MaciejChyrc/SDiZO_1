@@ -5,16 +5,16 @@
 
 MyHeap::MyHeap()
 {
-	arraySize = 0;
-	arrayptr = nullptr;
+	heapSize = 0;
+	heapptr = nullptr;
 }
 
 MyHeap::MyHeap(unsigned int size)
 {
 	try
 	{
-		arraySize = size;
-		arrayptr = new int[arraySize];
+		heapSize = size;
+		heapptr = new int[heapSize];
 	}
 	catch (std::bad_alloc)
 	{
@@ -29,18 +29,18 @@ MyHeap::~MyHeap()
 
 unsigned int MyHeap::getSize()
 {
-	return arraySize;
+	return heapSize;
 }
 
 int MyHeap::at(unsigned int index)
 {
-	return arrayptr[index];
+	return heapptr[index];
 }
 
 void MyHeap::pushBack(int val)
 {
-	resize(arraySize + 1);
-	arrayptr[arraySize - 1] = val;
+	resize(heapSize + 1);
+	heapptr[heapSize - 1] = val;
 }
 
 void MyHeap::resize(unsigned int newSize)
@@ -49,24 +49,24 @@ void MyHeap::resize(unsigned int newSize)
 	{
 		int *temp = new int[newSize];
 		//przepisanie calej tablicy i zostawienie pol dodanych niezainicjalizowanych (moga tam byc smieci)
-		if (newSize > arraySize)
+		if (newSize > heapSize)
 		{
-			for (int i = 0; i < arraySize; i++)
+			for (int i = 0; i < heapSize; i++)
 			{
-				temp[i] = arrayptr[i];
+				temp[i] = heapptr[i];
 			}
 		}
 		//przepisanie tablicy az do osiagniecia nowego rozmiaru (ostatnie elementy tracimy)
-		else if (newSize < arraySize)
+		else if (newSize < heapSize)
 		{
 			for (int i = 0; i < newSize; i++)
 			{
-				temp[i] = arrayptr[i];
+				temp[i] = heapptr[i];
 			}
 		}
-		delete[] arrayptr;
-		arrayptr = temp;
-		arraySize = newSize;
+		delete[] heapptr;
+		heapptr = temp;
+		heapSize = newSize;
 	}
 	catch (std::bad_alloc)
 	{
@@ -75,30 +75,30 @@ void MyHeap::resize(unsigned int newSize)
 }
 void MyHeap::swap(unsigned int element1, unsigned int element2)
 {
-	int temp = arrayptr[element1];
-	arrayptr[element1] = arrayptr[element2];
-	arrayptr[element2] = temp;
+	int temp = heapptr[element1];
+	heapptr[element1] = heapptr[element2];
+	heapptr[element2] = temp;
 }
 //do poprawy indeksy
 void MyHeap::deleteRoot()
 {
-	if (arraySize == 0) return;
-	arrayptr[0] = arrayptr[arraySize - 1];
-	resize(arraySize - 1);
+	if (heapSize == 0) return;
+	heapptr[0] = heapptr[heapSize - 1];
+	resize(heapSize - 1);
 	int i = 1;
-	while (leftSon(i) < arraySize)
+	while (leftSon(i) < heapSize)
 	{
-		if (arrayptr[i] < leftSon(i) || arrayptr[i] < rightSon(i))
+		if (heapptr[i] < heapptr[leftSon(i)] || heapptr[i] < heapptr[rightSon(i)])
 		{
-			if (leftSon(i) > rightSon(i) || (i * 2 + 2) >= arraySize)
+			if (heapptr[leftSon(i)] > heapptr[rightSon(i)] || rightSon(i) >= heapSize)
 			{
-				swap(arrayptr[i], leftSon(i));
-				i = i * 2 + 1;
+				swap(heapptr[i], heapptr[leftSon(i)]);
+				i = leftSon(i);
 			}
 			else
 			{
-				swap(arrayptr[i], rightSon(i));
-				i = i * 2 + 2;
+				swap(heapptr[i], heapptr[rightSon(i)]);
+				i = rightSon(i);
 			}
 		}
 		else break;
@@ -107,59 +107,104 @@ void MyHeap::deleteRoot()
 //sortowanie wywoluje blad
 void MyHeap::addToTail(int val)
 {
-	if (arraySize == 0)
+	if (heapSize == 0)
 	{
 		resize(1);
-		arrayptr[0] = val;
+		heapptr[0] = val;
 	}
 	else
 	{
 		pushBack(val);
-		int i = arraySize - 1;
-		while (i > 0 && parent(i) < val)
-		{
-				swap(arrayptr[i], parent(i));
-				i = (i - 1) / 2;
-		}
+		int i = heapSize - 1;
+		heapUp(i);
+	}
+}
+
+void MyHeap::heapUp(unsigned int index)
+{
+	while (index > 0 && heapptr[parent(index)] < heapptr[index])
+	{
+		swap(heapptr[index], heapptr[parent(index)]);
+		index = (index - 1) / 2;
 	}
 }
 
 int MyHeap::leftSon(unsigned int index)
 {
-	return arrayptr[index * 2 + 1];
+	return index * 2 + 1;
 }
 
 int MyHeap::rightSon(unsigned int index)
 {
-	return arrayptr[index * 2 + 2];
+	return index * 2 + 2;
 }
 
 int MyHeap::parent(unsigned int index)
 {
-	return arrayptr[(index - 1) / 2];
+	return (index - 1) / 2;
 }
 
-void MyHeap::printHeap(unsigned int index)
+void MyHeap::printHeap(unsigned int index, unsigned int level)
 {
-	if (index < arraySize)
+	if (index < heapSize)
 	{
-		std::cout << "Poziom " << index << ": ";
-		if (index * 2 < arraySize)
+		std::cout << "Poziom " << level << ": ";
+		if (index * 2 < heapSize)
 		{
-			for (int i = index - 1; i < index * 2; i++)
+			for (int i = index - 1; i < index * 2 - 1; i++)
 			{
-				std::cout << arrayptr[i] << " ";
+				std::cout << heapptr[i] << " ";
 			}
 			std::cout << "\n";
-			printHeap(index * 2);
+			printHeap(index * 2, ++level);
 		}
 		else
 		{
-			for (int i = index - 1; i < arraySize; i++)
+			for (int i = index - 1; i < heapSize; i++)
 			{
-				std::cout << arrayptr[i] << " ";
+				std::cout << heapptr[i] << " ";
 			}
 			std::cout << "\n";
 		}
+	}
+}
+
+void MyHeap::heapPush(int v)
+{
+	int i, j;
+	resize(heapSize + 1);
+	i = heapSize - 1;
+	j = parent(i);
+
+	while (i > 0 && heapptr[j] < v)
+	{
+		heapptr[i] = heapptr[j];
+		i = j;
+		j = parent(i);
+	}
+	heapptr[i] = v;
+}
+
+void MyHeap::heapPop()
+{
+	int i, j, val;
+	//resize(heapSize - 1);
+	if (heapSize - 1)
+	{
+		val = heapptr[heapSize - 1];
+
+		i = 0;
+		j = leftSon(i);
+
+		while (j < heapSize - 1)
+		{
+			if (rightSon(i) < heapSize - 1 && heapptr[rightSon(i)] > heapptr[leftSon(i)]) j++;
+			if (val >= heapptr[j]) break;
+			heapptr[i] = heapptr[j];
+			i = j;
+			j = leftSon(i);
+		}
+		heapptr[i] = val;
+		resize(heapSize - 1);
 	}
 }

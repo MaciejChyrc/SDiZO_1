@@ -2,8 +2,8 @@
 class MyHeap
 {
 private:
-	unsigned int arraySize;
-	int* arrayptr;
+	unsigned int heapSize;
+	int* heapptr;
 public:
 	MyHeap();
 	MyHeap(unsigned int size);
@@ -15,8 +15,11 @@ public:
 	void swap(unsigned int element1, unsigned int element2);
 	void deleteRoot();
 	void addToTail(int val);
+	void heapUp(unsigned int index);
 	int leftSon(unsigned int index);
 	int rightSon(unsigned int index);
 	int parent(unsigned int index);
-	void printHeap(unsigned int index);
+	void printHeap(unsigned int index, unsigned int level);
+	void heapPush(int v);
+	void heapPop();
 };
