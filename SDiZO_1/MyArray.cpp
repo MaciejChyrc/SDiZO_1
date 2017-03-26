@@ -72,8 +72,7 @@ void MyArray::push(int val, unsigned int index)
 	else if (index == arraySize) pushBack(val);
 	else
 	{
-		std::string exc = "Nieprawidlowa wartosc indeksu.\nNazlezy podac wartosc od 0 do aktualnego rozmiaru tablicy.";
-		throw exc;
+		std::cerr << "Nieprawidlowa wartosc indeksu.\nNalezy podac wartosc od 0 do aktualnego rozmiaru tablicy.";
 	}
 }
 
@@ -111,8 +110,7 @@ void MyArray::pop(unsigned int index)
 	else if (index == arraySize - 1) popBack();
 	else
 	{
-		std::string exc = "Nieprawidlowa wartosc indeksu.\nNazlezy podac wartosc od 0 do aktualnie najwiekszego indeksu tablicy.";
-		throw exc;
+		std::cerr << "Nieprawidlowa wartosc indeksu.\nNalezy podac wartosc od 0 do aktualnego rozmiaru tablicy.";
 	}
 }
 

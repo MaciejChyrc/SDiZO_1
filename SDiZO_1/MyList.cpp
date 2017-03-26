@@ -31,8 +31,7 @@ MyList::Element* MyList::findPosition(unsigned int position)
 	}
 	else
 	{
-		std::string exc = "Pozycja spoza zakresu listy.";
-		throw exc;
+		std::cerr << "Pozycja spoza zakresu listy.";
 	}
 }
 
@@ -131,8 +130,7 @@ void MyList::push(int val, unsigned int position)
 	else if (position == listSize - 1) pushBack(val);
 	else if (position >= listSize || position < 0)
 	{
-		std::string exc = "Pozycja spoza zakresu listy.";
-		throw exc;
+		std::cerr << "Pozycja spoza zakresu listy.";
 	}
 }
 
@@ -197,8 +195,7 @@ void MyList::pop(unsigned int position)
 	else if (position == listSize - 1) popBack();
 	else if (position >= listSize || position < 0)
 	{
-		std::string exc = "Pozycja spoza zakresu listy.";
-		throw exc;
+		std::cerr << "Pozycja spoza zakresu listy.";
 	}
 }
 //wypisanie zawartosci calej listy na ekran

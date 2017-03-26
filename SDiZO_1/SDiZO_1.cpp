@@ -20,6 +20,8 @@ void readTextFile (string filepath, MyArray *array);
 long long int read_QPC();
 void writeRandomToArray (MyArray *array, int arraySize);
 void rewriteArrayInList (MyArray *array, MyList *list);
+double averageOperationTime (const std::vector<double> vectorOfTimes);
+void saveTimesToTextFile (double avgPushFront, double avgPushBack, double avgPush, double avgPopFront, double avgPopBack, double avgPop);
 
 int main()
 {
@@ -44,14 +46,17 @@ int main()
 	MyArray tablica2;
 	tablica2.pushBack(5);
 	tablica2.printArray();
-	
+
 	MyHeap kopiec;
 	kopiec.addToTail(1);
 	kopiec.addToTail(4);
 	kopiec.addToTail(3);
+	kopiec.addToTail(15);
 	//kopiec.printHeap(1);
-	cout << kopiec.at(0) << " " << kopiec.at(1) << " " << kopiec.at(2);
-	_getch();*/
+	cout << kopiec.at(0) << " " << kopiec.at(1) << " " << kopiec.at(2) << kopiec.at(3);
+	_getch();
+	return 0;*/
+
 	//-----Czesc wlasciwa programu-------------------------------------
 
 	long long int frequency, start, elapsed;
@@ -60,6 +65,11 @@ int main()
 	MyArray *arrayOfInts = new MyArray();
 	MyList *listOfInts = new MyList();
 	MyHeap *heapOfInts = new MyHeap();
+	std::vector<double> arrayPushFrontTimes, arrayPushBackTimes, arrayPushTimes,
+		arrayPopFrontTimes, arrayPopBackTimes, arrayPopTimes;
+	std::vector<double> listPushFrontTimes, listPushBackTimes, listPushTimes,
+		listPopFrontTimes, listPopBackTimes, listPopTimes;
+	//std::vector<double> heapAddToTailTimes, heapRemoveRootTimes;
 	char menuKey = 0;
 	int cinValue = 0, cinIndex = 0;
 
@@ -92,6 +102,7 @@ int main()
 						<< "5. Usun z tylu.\n"
 						<< "6. Usun z wybranej pozycji.\n"
 						<< "7. Wyswietl zawartosc tablicy.\n"
+						<< "8. Zapisz wyniki do pliku.\n"
 						<< "9. Przejdz do glownego menu.\n";
 					menuKey = _getch();
 					switch (menuKey)
@@ -106,6 +117,7 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						arrayPushFrontTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '2':
 						cout << "Wpisz liczbe: \n";
@@ -117,6 +129,7 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						arrayPushBackTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '3':
 						cout << "Wpisz liczbe: \n";
@@ -130,6 +143,7 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						arrayPushTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '4':
 						start = read_QPC();
@@ -139,6 +153,7 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						arrayPopFrontTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '5':
 						start = read_QPC();
@@ -148,6 +163,7 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						arrayPopBackTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '6':
 						cout << "Wpisz indeks: \n";
@@ -159,10 +175,14 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						arrayPopTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '7':
 						cout << "Zawartosc tablicy: \n";
 						arrayOfInts->printArray();
+						break;
+					case '8':
+						saveTimesToTextFile(averageOperationTime(arrayPushFrontTimes), averageOperationTime(arrayPushBackTimes), averageOperationTime(arrayPushTimes), averageOperationTime(arrayPopFrontTimes), averageOperationTime(arrayPopBackTimes), averageOperationTime(arrayPopTimes));
 						break;
 					case '0':
 						menuKey = '9';
@@ -184,6 +204,7 @@ int main()
 						<< "5. Usun z tylu.\n"
 						<< "6. Usun z wybranej pozycji.\n"
 						<< "7. Wyswietl zawartosc listy.\n"
+						<< "8. Zapisz wyniki do pliku.\n"
 						<< "9. Przejdz do glownego menu.\n";
 					menuKey = _getch();
 					switch (menuKey)
@@ -198,6 +219,7 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						listPushFrontTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '2':
 						cout << "Wpisz liczbe: \n";
@@ -209,6 +231,7 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						listPushBackTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '3':
 						cout << "Wpisz liczbe: \n";
@@ -222,6 +245,7 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						listPushTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '4':
 						start = read_QPC();
@@ -231,6 +255,7 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						listPopFrontTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '5':
 						start = read_QPC();
@@ -240,6 +265,7 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						listPopBackTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '6':
 						cout << "Wpisz pozycje: \n";
@@ -251,10 +277,14 @@ int main()
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
 							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						listPopTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '7':
 						cout << "Zawartosc listy: \n";
 						listOfInts->printList();
+						break;
+					case '8':
+						saveTimesToTextFile(averageOperationTime(listPushFrontTimes), averageOperationTime(listPushBackTimes), averageOperationTime(listPushTimes), averageOperationTime(listPopFrontTimes), averageOperationTime(listPopBackTimes), averageOperationTime(listPopTimes));
 						break;
 					case '0':
 						menuKey = '9';
@@ -273,6 +303,7 @@ int main()
 					cout << "\n1. Dodaj element do kopca.\n"
 						<< "2. Usun korzen.\n"
 						<< "3. Wyswietl zawartosc kopca.\n"
+						<< "4. Zapisz wyniki do pliku.\n"
 						<< "9. Przejdz do glownego menu.\n";
 					menuKey = _getch();
 					switch (menuKey)
@@ -282,6 +313,8 @@ int main()
 					case '2':
 
 					case '3':
+
+					case '4':
 
 					case '0':
 						menuKey = '9';
@@ -309,6 +342,8 @@ int main()
 			break;
 		}
 	} while (menuKey != '0');
+
+	delete arrayOfInts, listOfInts, heapOfInts;
 	return 0;
 }
 
@@ -372,4 +407,40 @@ void rewriteArrayInList (MyArray *array, MyList *list)
 	{
 		list->pushBack(array->at(i));
 	}
+}
+
+double averageOperationTime (const std::vector<double> vectorOfTimes)
+{
+	double averageTime = 0;
+	for (int i = 0; i < vectorOfTimes.size(); i++)
+	{
+		averageTime += vectorOfTimes[i];
+	}
+	averageTime = averageTime / vectorOfTimes.size();
+
+	return averageTime;
+}
+
+void saveTimesToTextFile (double avgPushFront, double avgPushBack, double avgPush, double avgPopFront, double avgPopBack, double avgPop)
+{
+	string structureNameAndSize;
+	cout << "Podaj typ i rozmiar struktury: \n";
+	cin >> structureNameAndSize;
+	
+	std::ofstream file;
+	file.open("c:\\users\\szatan\\desktop\\" + structureNameAndSize + ".txt", std::ios::out);
+
+	if (file.is_open())
+	{
+		file << "PushFront, PushBack, Push, PopFront, PopBack, Pop\n";
+		if (file.fail()) std::cerr << "Blad zapisu.\n";
+		else
+		{
+			file << avgPushFront << ", " << avgPushBack << ", " << avgPush
+				<< ", " << avgPopFront << ", " << avgPopBack << ", " << avgPop;
+			if (file.fail()) std::cerr << "Blad zapisu.\n";
+		}
+		file.close();
+	}
+	else std::cerr << "Blad otwarcia pliku.\n";
 }

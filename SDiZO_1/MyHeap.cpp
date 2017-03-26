@@ -104,7 +104,7 @@ void MyHeap::deleteRoot()
 		else break;
 	}
 }
-//podejrzewam tu blad bo smieci sie dostaja do kopca
+//sortowanie wywoluje blad
 void MyHeap::addToTail(int val)
 {
 	if (arraySize == 0)
@@ -118,8 +118,8 @@ void MyHeap::addToTail(int val)
 		int i = arraySize - 1;
 		while (i > 0 && parent(i) < val)
 		{
-			swap(arrayptr[i], parent(i));
-			i = (i - 1) / 2;
+				swap(arrayptr[i], parent(i));
+				i = (i - 1) / 2;
 		}
 	}
 }
@@ -144,11 +144,22 @@ void MyHeap::printHeap(unsigned int index)
 	if (index < arraySize)
 	{
 		std::cout << "Poziom " << index << ": ";
-		for (int i = index; i < index * 2; i++)
+		if (index * 2 < arraySize)
 		{
-			std::cout << arrayptr[i] << " ";
+			for (int i = index - 1; i < index * 2; i++)
+			{
+				std::cout << arrayptr[i] << " ";
+			}
+			std::cout << "\n";
+			printHeap(index * 2);
 		}
-		std::cout << "\n";
-		if (index * 2 < arraySize) printHeap(index * 2);
+		else
+		{
+			for (int i = index - 1; i < arraySize; i++)
+			{
+				std::cout << arrayptr[i] << " ";
+			}
+			std::cout << "\n";
+		}
 	}
 }
