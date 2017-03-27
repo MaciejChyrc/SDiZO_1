@@ -19,7 +19,7 @@ using std::string;
 void readTextFile (string filepath, MyArray *array);
 long long int read_QPC();
 void writeRandomToArray (MyArray *array, int arraySize);
-void rewriteArrayInList (MyArray *array, MyList *list);
+void rewriteArrayInListAndHeap (MyArray *array, MyList *list, MyHeap *heap);
 double averageOperationTime (const std::vector<double> vectorOfTimes);
 void saveTimesToTextFile (double avgPushFront, double avgPushBack, double avgPush, double avgPopFront, double avgPopBack, double avgPop);
 
@@ -314,13 +314,36 @@ int main()
 					switch (menuKey)
 					{
 					case '1':
-
+						cout << "Wpisz liczbe: \n";
+						cin >> cinValue;
+						start = read_QPC();
+						heapOfInts->heapPush(cinValue);
+						elapsed = read_QPC() - start;
+						cout << "\nCzas [ms] = " << std::setprecision(0)
+							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						heapPushTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						break;
 					case '2':
-
+						cout << "Wpisz liczbe: \n";
+						cin >> cinValue;
+						start = read_QPC();
+						heapOfInts->heapPop();
+						elapsed = read_QPC() - start;
+						cout << "\nCzas [ms] = " << std::setprecision(0)
+							<< (1000.0 * elapsed) / frequency << "\n";
+						cout << "\nCzas [us] = " << std::setprecision(3)
+							<< (1000000.0 * elapsed) / frequency << "\n\n";
+						heapPopTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						break;
 					case '3':
-
+						cout << "Zawartosc kopca: \n";
+						heapOfInts->printHeap(1, 1);
+						break;
 					case '4':
-
+						saveTimesToTextFile(NULL, NULL, averageOperationTime(heapPushTimes), NULL, NULL, averageOperationTime(heapPopTimes));
+						break;
 					case '0':
 						menuKey = '9';
 						break;
@@ -336,11 +359,13 @@ int main()
 				cout << "Podaj zadany rozmiar tablicy: \n";
 				cin >> cinValue;
 				writeRandomToArray(arrayOfInts, cinValue);
-				rewriteArrayInList(arrayOfInts, listOfInts);
+				rewriteArrayInListAndHeap(arrayOfInts, listOfInts, heapOfInts);
 				cout << "Zawartosc tablicy: \n";
 				arrayOfInts->printArray();
 				cout << "Zawartosc listy: \n";
 				listOfInts->printList();
+				cout << "Zawartosc kopca: \n";
+				heapOfInts->printHeap(1, 1);
 			}
 			break;
 		default:
@@ -406,11 +431,12 @@ void writeRandomToArray (MyArray *array, int arraySize)
 	}
 }
 
-void rewriteArrayInList (MyArray *array, MyList *list)
+void rewriteArrayInListAndHeap (MyArray *array, MyList *list, MyHeap *heap)
 {
 	for (int i = 0; i < array->getSize(); i++)
 	{
 		list->pushBack(array->at(i));
+		heap->heapPush(array->at(i));
 	}
 }
 
@@ -429,7 +455,7 @@ double averageOperationTime (const std::vector<double> vectorOfTimes)
 void saveTimesToTextFile (double avgPushFront, double avgPushBack, double avgPush, double avgPopFront, double avgPopBack, double avgPop)
 {
 	string structureNameAndSize;
-	cout << "Podaj typ i rozmiar struktury: \n";
+	cout << "Podaj typ i rozmiar struktury jako nazwe pliku (na przyklad: tablica1000): \n";
 	cin >> structureNameAndSize;
 	
 	std::ofstream file;
