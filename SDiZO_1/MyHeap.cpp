@@ -146,12 +146,12 @@ void MyHeap::printHeap(unsigned int index, unsigned int level)
 {
 	if (index < heapSize)
 	{
-		std::cout << "\nPoziom " << level << ": ";
+		std::cout << "\nPoziom " << level << ":\t";
 		if (index * 2 < heapSize)
 		{
 			for (int i = index - 1; i < index * 2 - 1; i++)
 			{
-				std::cout << heapptr[i] << " ";
+				std::cout << heapptr[i] << "\t";
 			}
 			std::cout << "\n";
 			printHeap(index * 2, ++level);
@@ -160,7 +160,7 @@ void MyHeap::printHeap(unsigned int index, unsigned int level)
 		{
 			for (int i = index - 1; i < heapSize; i++)
 			{
-				std::cout << heapptr[i] << " ";
+				std::cout << heapptr[i] << "\t";
 			}
 			std::cout << "\nIlosc elementow w kopcu: " << heapSize << "\n";
 		}

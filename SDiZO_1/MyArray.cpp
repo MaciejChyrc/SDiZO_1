@@ -115,7 +115,6 @@ void MyArray::pop(unsigned int index)
 	}
 }
 //zmienia rozmiar tablicy
-//powinna byc uzywana tylko jako czesc metod push i pop, ale zostawiam jako public
 void MyArray::resize(unsigned int newSize)
 {
 	try

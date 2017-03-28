@@ -44,11 +44,13 @@ int main()
 
 	do
 	{
-		cout << "\n1. Wczytaj dane z pliku.\n"
+		cout << "\n---------------GLOWNE MENU---------------\n"
+			<< "1. Wczytaj dane z pliku.\n"
 			<< "2. Wykonaj operacje na tablicy.\n"
 			<< "3. Wykonaj operacje na liscie.\n"
 			<< "4. Wykonaj operacje na kopcu.\n"
-			<< "5. Wypelnij tablice losowymi liczbami.\n"
+			<< "5. Wypelnij kolekcje losowymi liczbami.\n"
+			<< "6. Zresetuj wszystkie kolekcje.\n"
 			<< "0. Wyjdz z programu.\n"
 			<< "Wcisnij przycisk...\n";
 		menuKey = _getch();
@@ -66,7 +68,8 @@ int main()
 			{
 				do
 				{
-					cout << "\n1. Dodaj element z przodu.\n"
+					cout << "\n---------------MENU TABLICY--------------\n"
+						<< "1. Dodaj element z przodu.\n"
 						<< "2. Dodaj element z tylu.\n"
 						<< "3. Dodaj na wybranej pozycji.\n"
 						<< "4. Usun z przodu.\n"
@@ -168,7 +171,8 @@ int main()
 			{
 				do
 				{
-					cout << "\n1. Dodaj element z przodu.\n"
+					cout << "\n---------------MENU LISTY----------------\n"
+						<< "1. Dodaj element z przodu.\n"
 						<< "2. Dodaj element z tylu.\n"
 						<< "3. Dodaj na wybranej pozycji.\n"
 						<< "4. Usun z przodu.\n"
@@ -271,7 +275,8 @@ int main()
 			{
 				do
 				{
-					cout << "\n1. Dodaj element do kopca.\n"
+					cout << "\n---------------MENU KOPCA----------------\n"
+						<< "1. Dodaj element do kopca.\n"
 						<< "2. Usun korzen.\n"
 						<< "3. Wyswietl zawartosc kopca.\n"
 						<< "4. Zapisz wyniki do pliku.\n"
@@ -320,7 +325,7 @@ int main()
 			break;
 		case '5':
 			{
-				cout << "Podaj zadany rozmiar tablicy: \n";
+				cout << "Podaj zadany rozmiar kolekcji: \n";
 				cin >> cinValue;
 				writeRandomToArray(arrayOfInts, cinValue);
 				rewriteArrayInListAndHeap(arrayOfInts, listOfInts, heapOfInts);
@@ -331,6 +336,13 @@ int main()
 				cout << "Zawartosc kopca: \n";
 				heapOfInts->printHeap(1, 1);
 			}
+			break;
+		case '6':
+			delete arrayOfInts, listOfInts, heapOfInts;
+			arrayOfInts = new MyArray();
+			listOfInts = new MyList();
+			heapOfInts = new MyHeap();
+			cout << "\nWyczyszczono wszystkie kolekcje.\n";
 			break;
 		default:
 			break;
