@@ -26,7 +26,7 @@ void saveTimesToTextFile (double avgPushFront, double avgPushBack, double avgPus
 int main()
 {
 
-	//-----Czesc wlasciwa programu-------------------------------------
+	//-----Czesc wlasciwa programu--------------------------------------
 
 	long long int frequency, start, elapsed;
 	QueryPerformanceFrequency(reinterpret_cast<LARGE_INTEGER*>(&frequency));
