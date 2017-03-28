@@ -56,10 +56,12 @@ int main()
 		{
 		case '1':
 			cout << "Podaj sciezke wczytywanego pliku\n"
-				<< "Na przyklad: C:\\Users\\User\\Documents\\textfile.txt\n"
+				<< "Na przyklad: C:\\\\Users\\\\User\\\\Documents\\\\textfile.txt\n"
 				<< "Pamietaj o podwojnych backslashach!\n";
 			cin >> filepath;
 			readTextFile(filepath, arrayOfInts);
+			rewriteArrayInListAndHeap(arrayOfInts, listOfInts, heapOfInts);
+			break;
 		case '2':
 			{
 				do
