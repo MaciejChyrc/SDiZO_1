@@ -25,42 +25,6 @@ void saveTimesToTextFile (double avgPushFront, double avgPushBack, double avgPus
 
 int main()
 {
-	/*MyList lista;
-	lista.pushFront(1);
-	lista.pushFront(2);
-	lista.pushFront(3);
-	lista.pushFront(4);
-	lista.push(5, 2);
-	lista.popBack();
-	lista.printList();
-
-	MyArray *tablica = new MyArray(3);
-	tablica->pushBack(9);
-	tablica->insert(1, 0);
-	tablica->insert(2, 1);
-	tablica->insert(3, 2);
-	tablica->pushFront(10);
-	tablica->swap(0, 1);
-	tablica->printArray();
-
-	MyArray tablica2;
-	tablica2.pushBack(5);
-	tablica2.printArray();
-
-	MyHeap kopiec;
-	kopiec.heapPush(1);
-	kopiec.heapPush(4);
-	kopiec.heapPush(3);
-	kopiec.heapPush(15);
-	kopiec.heapPush(14);
-	kopiec.heapPush(15);
-	kopiec.heapPush(42);
-	kopiec.printHeap(1, 1);
-	cout << kopiec.at(0) << " " << kopiec.at(1) << " " << kopiec.at(2) << " " << kopiec.at(3);
-	kopiec.heapPop();
-	cout << kopiec.at(0) << " " << kopiec.at(1) << " " << kopiec.at(2);
-	_getch();
-	return 0;}*/
 
 	//-----Czesc wlasciwa programu-------------------------------------
 
@@ -326,8 +290,6 @@ int main()
 						heapPushTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
 						break;
 					case '2':
-						cout << "Wpisz liczbe: \n";
-						cin >> cinValue;
 						start = read_QPC();
 						heapOfInts->heapPop();
 						elapsed = read_QPC() - start;
@@ -376,7 +338,7 @@ int main()
 	delete arrayOfInts, listOfInts, heapOfInts;
 	return 0;
 }
-
+//odczyt danych z pliku tekstowego do tablicy klasy MyArray
 void readTextFile (string filepath, MyArray *array)
 {
 	std::ifstream file;
@@ -406,7 +368,8 @@ void readTextFile (string filepath, MyArray *array)
 	}
 	else std::cerr << "Blad otwarcia pliku.\n";
 }
-
+//funkcja do pomiaru czasu, od podanej w materialach do projektu rozni sie
+//tylko sposobem rzutowania (tu w stylu C++ zamiast C)
 long long int read_QPC()
 {
 	LARGE_INTEGER count;
@@ -415,7 +378,7 @@ long long int read_QPC()
 	SetThreadAffinityMask(GetCurrentThread(), oldmask);
 	return static_cast<long long int>(count.QuadPart);
 }
-
+//wypelnienie tablicy klasy MyArray pseudolosowymi wartosciami od 1 do miliona
 void writeRandomToArray (MyArray *array, int arraySize)
 {
 	int value;
@@ -430,7 +393,8 @@ void writeRandomToArray (MyArray *array, int arraySize)
 		array->insert(value, i);
 	}
 }
-
+//przepisanie elementow z tablicy klasy MyArray do listy klasy MyList
+//i kopca klasy MyHeap
 void rewriteArrayInListAndHeap (MyArray *array, MyList *list, MyHeap *heap)
 {
 	for (int i = 0; i < array->getSize(); i++)
@@ -439,7 +403,8 @@ void rewriteArrayInListAndHeap (MyArray *array, MyList *list, MyHeap *heap)
 		heap->heapPush(array->at(i));
 	}
 }
-
+//zebranie zmierzonych czasow wykonania danej operacji i zwrocenie
+//sredniej arytmetycznej
 double averageOperationTime (const std::vector<double> vectorOfTimes)
 {
 	double averageTime = 0;
@@ -451,7 +416,9 @@ double averageOperationTime (const std::vector<double> vectorOfTimes)
 
 	return averageTime;
 }
-
+//zapis plikow tekstowych z wynikami na pulpicie
+//sciezka pliku jest stala ze wzgledu na to ze funkcja zostala napisana
+//z mysla o prywatnym uzytkowaniu jej do zebrania wynikow pomiarow czasowych
 void saveTimesToTextFile (double avgPushFront, double avgPushBack, double avgPush, double avgPopFront, double avgPopBack, double avgPop)
 {
 	string structureNameAndSize;

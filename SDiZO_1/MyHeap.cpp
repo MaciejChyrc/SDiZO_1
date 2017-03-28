@@ -2,7 +2,10 @@
 #include "MyHeap.h"
 #include <iostream>
 
-
+//konstruktory jak i niektore metody identyczne z tymi z MyArray
+//(roznia sie tylko kilkoma cout-ami)
+//nie zastosowalem dziedziczenia od MyArray, poniewaz MyArray zostalo w pelni napisane zanim
+//powstala taka idea, a wolalem uniknac ingerencji w strukture tamtej klasy
 MyHeap::MyHeap()
 {
 	heapSize = 0;
@@ -36,7 +39,13 @@ int MyHeap::at(unsigned int index)
 {
 	return heapptr[index];
 }
-
+//wpisuje nowy element jako ostatni element kopca, uprzednio zwiekszajac tablice
+//nastepnie przywracana jest wlasnosc kopca idac od nowego elementu w gore
+//UWAGA: algorytm przywracania wlasnosci kopca mocno zainspirowany
+//       rozwiazaniem ze strony http://eduinf.waw.pl, z faktu, ze przy
+//       implementacji tego algorytmu napotkalem problemy z indeksowaniem
+//       przez ktore caly kopiec byl do niczego, bo przy jego budowaniu
+//       wyrzucalo cala aplikacje
 void MyHeap::heapPush(int v)
 {
 	int i, j;
@@ -52,11 +61,18 @@ void MyHeap::heapPush(int v)
 	}
 	heapptr[i] = v;
 }
-
+//wpisuje wartosc ostatniego elementu kopca (liscia najbardziej z prawej)
+//do korzenia, nastepnie zmniejsza kopiec i przywraca jego wlasnosc idac
+//z gory do dolu
+//UWAGA: algorytm przywracania wlasnosci kopca mocno zainspirowany
+//       rozwiazaniem ze strony http://eduinf.waw.pl, z faktu, ze przy
+//       implementacji tego algorytmu napotkalem problemy z indeksowaniem
+//       przez ktore caly kopiec byl do niczego, bo przy jego budowaniu
+//       wyrzucalo cala aplikacje
 void MyHeap::heapPop()
 {
 	int i, j, val;
-	//resize(heapSize - 1);
+
 	if (heapSize - 1)
 	{
 		val = heapptr[heapSize - 1];
@@ -76,7 +92,8 @@ void MyHeap::heapPop()
 		resize(heapSize - 1);
 	}
 }
-
+//zmienia rozmiar tablicy przechowujacej elementy kopca
+//identyczna z ta z MyArray
 void MyHeap::resize(unsigned int newSize)
 {
 	try
@@ -107,22 +124,24 @@ void MyHeap::resize(unsigned int newSize)
 		std::cerr << "Nie udalo sie poprawnie zaalokowac kopca.\n";
 	}
 }
-
+//zwraca indeks lewego syna
 int MyHeap::leftSon(unsigned int index)
 {
 	return index * 2 + 1;
 }
-
+//zwraca indeks prawego syna
 int MyHeap::rightSon(unsigned int index)
 {
 	return index * 2 + 2;
 }
-
+//zwraca indeks ojca
 int MyHeap::parent(unsigned int index)
 {
 	return (index - 1) / 2;
 }
-
+//wypisuje cala zawartosc kopca poziom po poziomie, wywolujac sie rekurencyjnie
+//jako argument zawsze powinny byc podane dwie jedynki, sa one po to aby
+//w rekurencji dobrze wyliczac indeksy i poziomy kopca
 void MyHeap::printHeap(unsigned int index, unsigned int level)
 {
 	if (index < heapSize)
@@ -143,7 +162,7 @@ void MyHeap::printHeap(unsigned int index, unsigned int level)
 			{
 				std::cout << heapptr[i] << " ";
 			}
-			std::cout << "\n";
+			std::cout << "\nIlosc elementow w kopcu: " << heapSize << "\n";
 		}
 	}
 }

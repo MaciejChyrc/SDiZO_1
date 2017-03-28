@@ -36,13 +36,14 @@ int MyArray::at(unsigned int index)
 {
 	return arrayptr[index];
 }
-
+//zwiekszamy tablice o 1 i wrzucamy na ostatnia pozycje nowy element
 void MyArray::pushBack (int val)
 {
 	resize(arraySize + 1);
 	arrayptr[arraySize - 1] = val;
 }
-
+//zwiekszamy tablice o 1, po czym przesuwamy wszystko w prawo i na zerowy indeks
+//zapisujemy nowa wartosc
 void MyArray::pushFront(int val)
 {
 	resize(arraySize + 1);
@@ -52,7 +53,6 @@ void MyArray::pushFront(int val)
 	}
 	arrayptr[0] = val;
 }
-
 //dodajemy element o danej wartosci na podanym indeksie, a elementy z tego indeksu
 //i wyzszych przesuwamy w prawo
 //gdy wiemy ze dodamy element na poczatek lub koniec, lepiej jest uzyc pushFront
@@ -75,13 +75,13 @@ void MyArray::push(int val, unsigned int index)
 		std::cerr << "Nieprawidlowa wartosc indeksu.\nNalezy podac wartosc od 0 do aktualnego rozmiaru tablicy.";
 	}
 }
-
 //zamieniamy wartosc na danym indeksie na podana
 void MyArray::insert(int val, unsigned int index)
 {
 	arrayptr[index] = val;
 }
-
+//zsuniecie elementow po pierwszym (po indeksie 0) w lewo i uciecie ostatniego
+//elementu zmniejszajac tablice o 1
 void MyArray::popFront()
 {
 	for (int i = 0; i < arraySize - 1; i++)
@@ -90,12 +90,13 @@ void MyArray::popFront()
 	}
 	resize(arraySize - 1);
 }
-
+//usuniecie z konca tablicy poprzez uciecie jej
 void MyArray::popBack()
 {
 	resize(arraySize - 1);
 }
-
+//usun z wybranego indeksu i zsun w lewo elementy dalsze po czym zmniejsz
+//rozmiar tablicy o 1
 void MyArray::pop(unsigned int index)
 {
 	if (index > 0 && index < arraySize - 1)
@@ -113,7 +114,8 @@ void MyArray::pop(unsigned int index)
 		std::cerr << "Nieprawidlowa wartosc indeksu.\nNalezy podac wartosc od 0 do aktualnego rozmiaru tablicy.";
 	}
 }
-
+//zmienia rozmiar tablicy
+//powinna byc uzywana tylko jako czesc metod push i pop, ale zostawiam jako public
 void MyArray::resize(unsigned int newSize)
 {
 	try
@@ -144,6 +146,7 @@ void MyArray::resize(unsigned int newSize)
 		std::cerr << "Nie udalo sie poprawnie zaalokowac tablicy.\n";
 	}
 }
+//zamienia elementy o podanych indeksach miejscami
 void MyArray::swap(unsigned int element1, unsigned int element2)
 {
 	int temp = arrayptr[element1];
@@ -157,6 +160,7 @@ void MyArray::printArray()
 	{
 		std::cout << arrayptr[i] << "\t";
 	}
+	std::cout << "\nIlosc elementow w tablicy: " << arraySize << "\n";
 }
 
 //przeciazenie operatora indeksu, z jakiegos powodu wydaje sie nie dzialac przy ustawianiu

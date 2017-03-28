@@ -16,7 +16,7 @@ MyList::~MyList()
 }
 //metoda przeszukujaca liste od poczatku w poszukiwaniu elementu na danej pozycji
 //po znalezieniu elementu zwraca wskaznik na niego, a gdy podana jest pozycja spoza
-//zakresu - zglasza wyjatek
+//zakresu - zglasza fakt podania zlego argumentu
 MyList::Element* MyList::findPosition(unsigned int position)
 {
 	if (position < listSize)
@@ -39,7 +39,9 @@ unsigned int MyList::getSize()
 {
 	return listSize;
 }
-
+//tworzymy nowy element, po czym ustawiamy jego wskaznik next na front,
+//wskaznik previous wczesniej pierwszego elementu na nowy i na koncu wskaznik front
+//na nowy element
 void MyList::pushFront(int val)
 {
 	if (!listSize)
@@ -71,7 +73,9 @@ void MyList::pushFront(int val)
 	}
 	listSize++;
 }
-
+//tworzymy nowy element, po czym ustawiamy jego wskaznik previous na back,
+//wskaznik next wczesniej ostatniego elementu na nowy i na koncu wskaznik back
+//na nowy element
 void MyList::pushBack(int val)
 {
 	if (!listSize)
@@ -133,7 +137,8 @@ void MyList::push(int val, unsigned int position)
 		std::cerr << "Pozycja spoza zakresu listy.";
 	}
 }
-
+//usuwamy pierwszy element listy i ustawiamy wskaznik front na wczesniej
+//drugi element
 void MyList::popFront()
 {
 	Element *elementToDelete = front;
@@ -156,7 +161,8 @@ void MyList::popFront()
 		std::cout << "Lista jest pusta. Nie ma czego usunac.";
 	}
 }
-
+//usuwamy ostatni element listy i ustawiamy wskaznik back na wczesniej
+//przedostatni element
 void MyList::popBack()
 {
 	Element *elementToDelete = back;
@@ -179,7 +185,10 @@ void MyList::popBack()
 		std::cout << "Lista jest pusta. Nie ma czego usunac.";
 	}
 }
-
+//usuniecie elementu z danej pozycji na liscie, wyszukujemy tej pozycji
+//wywolujac findPosition
+//jesli jest to pierwszy albo ostatni element, to wywolujemy odpowiednio
+//popFront, lub popBack
 void MyList::pop(unsigned int position)
 {
 	if (position > 0 && position < listSize - 1)
@@ -206,4 +215,5 @@ void MyList::printList()
 	{
 		std::cout << element->value << "\t";
 	}
+	std::cout << "\nIlosc elementow w liscie: " << listSize << "\n";
 }
