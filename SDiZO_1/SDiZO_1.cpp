@@ -1,4 +1,8 @@
-// SDiZO_1.cpp: Okreœla punkt wejœcia dla aplikacji konsoli.
+/*
+ *Autor: Maciej Chyrc
+ *Struktury danych i z³o¿onoœæ obliczeniowa - projekt nr 1
+ *Termin oddania: 27.03.2017
+ */
 #include "stdafx.h"
 #include <iostream>
 #include <fstream>
@@ -23,11 +27,10 @@ void rewriteArrayInListAndHeap (MyArray *array, MyList *list, MyHeap *heap);
 double averageOperationTime (const std::vector<double> vectorOfTimes);
 void saveTimesToTextFile (double avgPushFront, double avgPushBack, double avgPush, double avgPopFront, double avgPopBack, double avgPop);
 
+//-----main-----
+
 int main()
 {
-
-	//-----Czesc wlasciwa programu--------------------------------------
-
 	long long int frequency, start, elapsed;
 	QueryPerformanceFrequency(reinterpret_cast<LARGE_INTEGER*>(&frequency));
 	string filepath = "";
