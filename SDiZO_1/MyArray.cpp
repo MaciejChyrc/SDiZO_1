@@ -24,7 +24,7 @@ MyArray::MyArray(unsigned int size)
 
 MyArray::~MyArray()
 {
-
+	delete arrayptr;
 }
 
 unsigned int MyArray::getSize()
@@ -84,16 +84,30 @@ void MyArray::insert(int val, unsigned int index)
 //elementu zmniejszajac tablice o 1
 void MyArray::popFront()
 {
-	for (int i = 0; i < arraySize - 1; i++)
+	if (arraySize > 0)
 	{
-		arrayptr[i] = arrayptr[i + 1];
+		for (int i = 0; i < arraySize - 1; i++)
+		{
+			arrayptr[i] = arrayptr[i + 1];
+		}
+		resize(arraySize - 1);
 	}
-	resize(arraySize - 1);
+	else
+	{
+		std::cout << "Nie mozna usunac elementu. Tablica jest pusta.\n";
+	}
 }
 //usuniecie z konca tablicy poprzez uciecie jej
 void MyArray::popBack()
 {
-	resize(arraySize - 1);
+	if (arraySize > 0)
+	{
+		resize(arraySize - 1);
+	}
+	else
+	{
+		std::cout << "Nie mozna usunac elementu. Tablica jest pusta.\n";
+	}
 }
 //usun z wybranego indeksu i zsun w lewo elementy dalsze po czym zmniejsz
 //rozmiar tablicy o 1

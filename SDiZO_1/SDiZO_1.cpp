@@ -1,7 +1,7 @@
 /*
  *Autor: Maciej Chyrc
  *Struktury danych i z³o¿onoœæ obliczeniowa - projekt nr 1
- *Termin oddania: 27.03.2017
+ *Termin oddania: 29.03.2017
  */
 #include "stdafx.h"
 #include <iostream>
@@ -66,6 +66,7 @@ int main()
 			cin >> filepath;
 			readTextFile(filepath, arrayOfInts);
 			rewriteArrayInListAndHeap(arrayOfInts, listOfInts, heapOfInts);
+			cout << "Wszystkie kolekcje wypelnione danymi z pliku tekstowego.";
 			break;
 		case '2':
 			{
@@ -332,12 +333,7 @@ int main()
 				cin >> cinValue;
 				writeRandomToArray(arrayOfInts, cinValue);
 				rewriteArrayInListAndHeap(arrayOfInts, listOfInts, heapOfInts);
-				cout << "Zawartosc tablicy: \n";
-				arrayOfInts->printArray();
-				cout << "Zawartosc listy: \n";
-				listOfInts->printList();
-				cout << "Zawartosc kopca: \n";
-				heapOfInts->printHeap(1, 1);
+				cout << "Wszystkie kolekcje wypelnione danymi losowymi.\n";
 			}
 			break;
 		case '6':

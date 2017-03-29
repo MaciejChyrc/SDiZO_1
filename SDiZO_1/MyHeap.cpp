@@ -27,7 +27,7 @@ MyHeap::MyHeap(unsigned int size)
 
 MyHeap::~MyHeap()
 {
-
+	delete heapptr;
 }
 
 unsigned int MyHeap::getSize()
@@ -71,10 +71,10 @@ void MyHeap::heapPush(int v)
 //       wyrzucalo cala aplikacje
 void MyHeap::heapPop()
 {
-	int i, j, val;
-
-	if (heapSize - 1)
+	if (heapSize > 2)
 	{
+		int i, j, val;
+		
 		val = heapptr[heapSize - 1];
 
 		i = 0;
@@ -90,6 +90,16 @@ void MyHeap::heapPop()
 		}
 		heapptr[i] = val;
 		resize(heapSize - 1);
+	}
+	else if (heapSize == 2)
+	{
+		heapptr[0] = heapptr[1];
+		resize(1);
+	}
+	else if (heapSize <= 1)
+	{
+		resize(0);
+		std::cout << "Kopiec jest pusty. Nie ma czego usunac.\n";
 	}
 }
 //zmienia rozmiar tablicy przechowujacej elementy kopca
@@ -144,10 +154,10 @@ int MyHeap::parent(unsigned int index)
 //w rekurencji dobrze wyliczac indeksy i poziomy kopca
 void MyHeap::printHeap(unsigned int index, unsigned int level)
 {
-	if (index < heapSize)
+	if (index <= heapSize)
 	{
 		std::cout << "\nPoziom " << level << ":\t";
-		if (index * 2 < heapSize)
+		if (index * 2 <= heapSize)
 		{
 			for (int i = index - 1; i < index * 2 - 1; i++)
 			{
