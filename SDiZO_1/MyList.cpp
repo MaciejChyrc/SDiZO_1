@@ -31,7 +31,7 @@ MyList::Element* MyList::findPosition(unsigned int position)
 	}
 	else
 	{
-		std::cerr << "Pozycja spoza zakresu listy.";
+		std::cerr << "Pozycja spoza zakresu listy.\n";
 	}
 }
 
@@ -134,7 +134,7 @@ void MyList::push(int val, unsigned int position)
 	else if (position == listSize - 1) pushBack(val);
 	else if (position >= listSize || position < 0)
 	{
-		std::cerr << "Pozycja spoza zakresu listy.";
+		std::cerr << "Pozycja spoza zakresu listy.\n";
 	}
 }
 //usuwamy pierwszy element listy i ustawiamy wskaznik front na wczesniej
@@ -158,7 +158,7 @@ void MyList::popFront()
 	}
 	else if (!listSize)
 	{
-		std::cout << "Lista jest pusta. Nie ma czego usunac.";
+		std::cout << "Lista jest pusta. Nie ma czego usunac.\n";
 	}
 }
 //usuwamy ostatni element listy i ustawiamy wskaznik back na wczesniej
@@ -182,7 +182,7 @@ void MyList::popBack()
 	}
 	else if (!listSize)
 	{
-		std::cout << "Lista jest pusta. Nie ma czego usunac.";
+		std::cout << "Lista jest pusta. Nie ma czego usunac.\n";
 	}
 }
 //usuniecie elementu z danej pozycji na liscie, wyszukujemy tej pozycji
@@ -191,20 +191,27 @@ void MyList::popBack()
 //popFront, lub popBack
 void MyList::pop(unsigned int position)
 {
-	if (position > 0 && position < listSize - 1)
+	if (listSize > 0)
 	{
-		Element *elementToDelete = findPosition(position);
-		Element *element1 = elementToDelete->previous, *element2 = elementToDelete->next;
-		element1->next = element2;
-		element2->previous = element1;
-		delete elementToDelete;
-		listSize--;
+		if (position > 0 && position < listSize - 1)
+		{
+			Element *elementToDelete = findPosition(position);
+			Element *element1 = elementToDelete->previous, *element2 = elementToDelete->next;
+			element1->next = element2;
+			element2->previous = element1;
+			delete elementToDelete;
+			listSize--;
+		}
+		else if (position == 0) popFront();
+		else if (position == listSize - 1) popBack();
+		else if (position >= listSize || position < 0)
+		{
+			std::cerr << "Pozycja spoza zakresu listy.\n";
+		}
 	}
-	else if (position == 0) popFront();
-	else if (position == listSize - 1) popBack();
-	else if (position >= listSize || position < 0)
+	else
 	{
-		std::cerr << "Pozycja spoza zakresu listy.";
+		std::cout << "Lista jest pusta. Nie ma czego usunac.\n";
 	}
 }
 //wypisanie zawartosci calej listy na ekran

@@ -91,11 +91,12 @@ int main()
 						start = read_QPC();
 						arrayOfInts->pushFront(cinValue);
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						arrayPushFrontTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						arrayOfInts->printArray();
 						break;
 					case '2':
 						cout << "Wpisz liczbe: \n";
@@ -103,11 +104,12 @@ int main()
 						start = read_QPC();
 						arrayOfInts->pushBack(cinValue);
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						arrayPushBackTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						arrayOfInts->printArray();
 						break;
 					case '3':
 						cout << "Wpisz liczbe: \n";
@@ -117,31 +119,34 @@ int main()
 						start = read_QPC();
 						arrayOfInts->push(cinValue, cinIndex);
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						arrayPushTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						arrayOfInts->printArray();
 						break;
 					case '4':
 						start = read_QPC();
 						arrayOfInts->popFront();
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						arrayPopFrontTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						arrayOfInts->printArray();
 						break;
 					case '5':
 						start = read_QPC();
 						arrayOfInts->popBack();
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						arrayPopBackTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						arrayOfInts->printArray();
 						break;
 					case '6':
 						cout << "Wpisz indeks: \n";
@@ -149,11 +154,12 @@ int main()
 						start = read_QPC();
 						arrayOfInts->pop(cinIndex);
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						arrayPopTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						arrayOfInts->printArray();
 						break;
 					case '7':
 						cout << "Zawartosc tablicy: \n";
@@ -194,11 +200,12 @@ int main()
 						start = read_QPC();
 						listOfInts->pushFront(cinValue);
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						listPushFrontTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						listOfInts->printList();
 						break;
 					case '2':
 						cout << "Wpisz liczbe: \n";
@@ -206,11 +213,12 @@ int main()
 						start = read_QPC();
 						listOfInts->pushBack(cinValue);
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						listPushBackTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						listOfInts->printList();
 						break;
 					case '3':
 						cout << "Wpisz liczbe: \n";
@@ -220,31 +228,34 @@ int main()
 						start = read_QPC();
 						listOfInts->push(cinValue, cinIndex);
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						listPushTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						listOfInts->printList();
 						break;
 					case '4':
 						start = read_QPC();
 						listOfInts->popFront();
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						listPopFrontTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						listOfInts->printList();
 						break;
 					case '5':
 						start = read_QPC();
 						listOfInts->popBack();
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						listPopBackTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						listOfInts->printList();
 						break;
 					case '6':
 						cout << "Wpisz pozycje: \n";
@@ -252,11 +263,12 @@ int main()
 						start = read_QPC();
 						listOfInts->pop(cinIndex);
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						listPopTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						listOfInts->printList();
 						break;
 					case '7':
 						cout << "Zawartosc listy: \n";
@@ -294,21 +306,23 @@ int main()
 						start = read_QPC();
 						heapOfInts->heapPush(cinValue);
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						heapPushTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						heapOfInts->printHeap(1, 1);
 						break;
 					case '2':
 						start = read_QPC();
 						heapOfInts->heapPop();
 						elapsed = read_QPC() - start;
-						cout << "\nCzas [ms] = " << std::setprecision(0)
+						/*cout << "\nCzas [ms] = " << std::setprecision(0)
 							<< (1000.0 * elapsed) / frequency << "\n";
 						cout << "\nCzas [us] = " << std::setprecision(3)
-							<< (1000000.0 * elapsed) / frequency << "\n\n";
+							<< (1000000.0 * elapsed) / frequency << "\n\n";*/
 						heapPopTimes.push_back(static_cast<double>(elapsed) / static_cast<double>(frequency) * 1000000.0);
+						heapOfInts->printHeap(1, 1);
 						break;
 					case '3':
 						cout << "Zawartosc kopca: \n";
