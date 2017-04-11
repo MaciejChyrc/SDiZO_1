@@ -113,19 +113,26 @@ void MyArray::popBack()
 //rozmiar tablicy o 1
 void MyArray::pop(unsigned int index)
 {
-	if (index > 0 && index < arraySize - 1)
+	if (arraySize > 0)
 	{
-		for (int i = index; i < arraySize - 1; i++)
+		if (index > 0 && index < arraySize - 1)
 		{
-			arrayptr[i] = arrayptr[i + 1];
+			for (int i = index; i < arraySize - 1; i++)
+			{
+				arrayptr[i] = arrayptr[i + 1];
+			}
+			resize(arraySize - 1);
 		}
-		resize(arraySize - 1);
+		else if (index == 0) popFront();
+		else if (index == arraySize - 1) popBack();
+		else
+		{
+			std::cerr << "Nieprawidlowa wartosc indeksu.\nNalezy podac wartosc od 0 do aktualnego rozmiaru tablicy.";
+		}
 	}
-	else if (index == 0) popFront();
-	else if (index == arraySize - 1) popBack();
 	else
 	{
-		std::cerr << "Nieprawidlowa wartosc indeksu.\nNalezy podac wartosc od 0 do aktualnego rozmiaru tablicy.";
+		std::cout << "Nie mozna usunac elementu. Tablica jest pusta.\n";
 	}
 }
 //zmienia rozmiar tablicy
